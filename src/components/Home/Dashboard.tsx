@@ -12,6 +12,8 @@ import { PageHeader } from "./PageHeader";
 import ActiveUsersCard from "./ActiveUsersCard";
 import SalesOverviewCard from "./SalesOverviewCard";
 import ProjectCard from "./ProjectCard";
+import OrdersOverview from "./OrdersOverview";
+import Footer from "./Footer";
 
 type Props = {
   data: {
@@ -180,9 +182,16 @@ export default function Dashboard({ data }: Props) {
         <SalesOverviewCard />
       </div>
 
-      <div className="mt-6">
-        <ProjectCard products={data.featuredProducts} />
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3 items-stretch">
+        <div className="lg:col-span-2">
+          <ProjectCard />
+        </div>
+        <div className="lg:col-span-1 flex">
+          <OrdersOverview />
+        </div>
       </div>
+
+      <Footer />
     </>
   );
 }
