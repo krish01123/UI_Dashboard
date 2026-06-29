@@ -101,7 +101,7 @@ export default function Dashboard({ data }: Props) {
           })}
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-3 xl:grid-cols-2">
+        <div className="mt-6 grid grid-cols-1 gap-3 xl:grid-cols-[1.5fr_1fr]">
           <div className="overflow-hidden rounded-3xl bg-white shadow-sm">
             <div className="grid grid-cols-1 md:grid-cols-[45%_55%]">
               <div className="min-w-0 flex flex-col justify-between p-6">
@@ -172,7 +172,7 @@ export default function Dashboard({ data }: Props) {
           </div>
         </div>
       </div>
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.2fr]">
         <ActiveUsersCard
           users={data.todayUsers}
           clicks={data.todayUsers * 73}

@@ -22,7 +22,7 @@ import Image from "next/image";
 
 const menuItems = [
   { title: "Dashboard", icon: Home, href: "/" },
-  { title: "Tables", icon: Table, href: "/tables" },
+  { title: "Tables", icon: Table, href: "/table" },
   { title: "Billing", icon: CreditCardIcon, href: "/billing" },
   { title: "RTL", icon: Wrench, href: "/rtl" },
 ];
