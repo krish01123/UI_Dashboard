@@ -4,13 +4,15 @@ import {
   Home,
   CreditCardIcon,
   Table,
-  Wrench,
   User,
   Menu,
   X,
   UserPlus,
   PanelLeft,
   Rocket,
+  ShoppingCart,
+  ChevronDown,
+  ChevronRight,
 } from "lucide-react";
 
 import Link from "next/link";
@@ -24,7 +26,14 @@ const menuItems = [
   { title: "Dashboard", icon: Home, href: "/" },
   { title: "Tables", icon: Table, href: "/table" },
   { title: "Billing", icon: CreditCardIcon, href: "/billing" },
-  { title: "RTL", icon: Wrench, href: "/rtl" },
+  {
+    title: "E-commerce",
+    icon: ShoppingCart,
+    children: [
+      { title: "Shop", href: "/e-commerce/shop" },
+      { title: "Details", href: "/e-commerce/details" },
+    ],
+  },
 ];
 
 const accountItems = [
@@ -35,8 +44,10 @@ const accountItems = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+
   const [open, setOpen] = useState(false);
   const [collapsed, setCollapsed] = useState(false);
+  const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({});
 
   return (
     <>
@@ -119,7 +130,7 @@ export default function Sidebar() {
             </div>
           ) : (
             <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-r from-teal-400 to-cyan-500 text-white font-bold">
-              P
+              <Image src="/main.ico" alt="Favicon" width={20} height={20} />
             </div>
           )}
         </div>
@@ -130,6 +141,77 @@ export default function Sidebar() {
           <div className="space-y-2">
             {menuItems.map((item) => {
               const Icon = item.icon;
+
+              if ("children" in item) {
+                const expanded = openMenus[item.title];
+
+                return (
+                  <div key={item.title}>
+                    <button
+                      onClick={() =>
+                        setOpenMenus((prev) => ({
+                          ...prev,
+                          [item.title]: !prev[item.title],
+                        }))
+                      }
+                      className={`
+                        w-full
+                        flex
+                        items-center
+                        rounded-2xl
+                        p-3
+                        transition-all
+                        duration-200
+                        hover:bg-white
+                        hover:shadow-sm
+                        ${collapsed ? "justify-center" : "gap-4"}
+                      `}
+                    >
+                      <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-slate-500">
+                        <Icon size={18} />
+                      </div>
+
+                      {!collapsed && (
+                        <>
+                          <span className="flex-1 text-left font-medium text-slate-600">
+                            {item.title}
+                          </span>
+
+                          {expanded ? (
+                            <ChevronDown size={18} />
+                          ) : (
+                            <ChevronRight size={18} />
+                          )}
+                        </>
+                      )}
+                    </button>
+
+                    {!collapsed && expanded && (
+                      <div className="ml-14 mt-2 space-y-2">
+                        {item.children?.map((child) => {
+                          const active = pathname === child.href;
+
+                          return (
+                            <Link
+                              key={child.title}
+                              href={child.href}
+                              onClick={() => setOpen(false)}
+                              className={`block rounded-xl px-4 py-2 text-sm transition ${
+                                active
+                                  ? "bg-teal-50 text-teal-600 font-semibold"
+                                  : "text-slate-500 hover:bg-slate-100"
+                              }`}
+                            >
+                              {child.title}
+                            </Link>
+                          );
+                        })}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+
               const active = pathname === item.href;
 
               return (

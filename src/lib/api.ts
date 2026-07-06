@@ -1,3 +1,8 @@
+import { encode } from "punycode";
+import { Product, ProductsResponse } from "./product";
+
+const BASE_URL = "https://dummyjson.com";
+
 export async function getDashboardData() {
   const [usersRes, cartsRes, productsRes] = await Promise.all([
     fetch("https://dummyjson.com/users"),
@@ -26,4 +31,62 @@ export async function getDashboardData() {
     totalSales,
     featuredProducts: products.products,
   };
+}
+
+export async function getAllProduct(): Promise<Product[]> {
+  const res = await fetch(`${BASE_URL}/products?limit=100`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch products");
+  }
+
+  const data: ProductsResponse = await res.json();
+
+  return data.products;
+}
+
+export async function searchProducts(query: string): Promise<Product[]> {
+  const res = await fetch(
+    `${BASE_URL}/products/search?q=${encodeURIComponent(query)}`,
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to search products");
+  }
+
+  const data: ProductsResponse = await res.json();
+
+  return data.products;
+}
+
+export async function getCategoryProducts(
+  category: string,
+): Promise<Product[]> {
+  const res = await fetch(`${BASE_URL}/products/category/${category}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch category products");
+  }
+
+  const data: ProductsResponse = await res.json();
+
+  return data.products;
+}
+
+export interface Category {
+  slug: string;
+  name: string;
+  url: string;
+}
+
+export async function getCategories(): Promise<Category[]> {
+  const res = await fetch(`${BASE_URL}/products/categories`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch categories");
+  }
+
+  const data = await res.json();
+
+  return data;
 }
