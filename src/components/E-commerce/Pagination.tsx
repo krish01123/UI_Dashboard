@@ -26,10 +26,10 @@ export default function Pagination({ page, total, onChange }: Props) {
           <button
             key={pageNumber}
             onClick={() => onChange(pageNumber)}
-            className={`h-10 w-10 rounded-lg text-sm font-medium transition-all duration-200 ${
+            className={`cursor-pointer h-10 w-10 rounded-lg text-sm font-medium transition-all duration-200 ${
               page === pageNumber
-                ? "bg-indigo-600 text-white shadow-md"
-                : "border border-gray-200 bg-gray-100 text-gray-700 hover:bg-indigp-600 hover:text-white"
+                ? "bg-indigo-600 text-black shadow-md"
+                : "border border-gray-200 bg-gray-100 text-gray-700 hover:bg-indigp-600 hover:text-black"
             }`}
           >
             {pageNumber}
@@ -40,7 +40,7 @@ export default function Pagination({ page, total, onChange }: Props) {
       <button
         disabled={page === total}
         onClick={() => onChange(page + 1)}
-        className="rounded-lg border border-gray-200 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 tranisiton-all duration-200 hover:bg-indigo-600 hover:text-white disable:cursor-not-allowed disabled:opacity-50"
+        className="cursor-pointer rounded-lg border border-gray-200 bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 tranisiton-all duration-200 hover:bg-indigo-600 hover:text-white disable:cursor-not-allowed disabled:opacity-50"
       >
         Next
       </button>

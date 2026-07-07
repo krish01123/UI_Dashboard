@@ -31,7 +31,7 @@ const menuItems = [
     icon: ShoppingCart,
     children: [
       { title: "Shop", href: "/e-commerce/shop" },
-      { title: "Details", href: "/e-commerce/details" },
+      { title: "List", href: "/e-commerce/list" },
     ],
   },
 ];

@@ -90,3 +90,15 @@ export async function getCategories(): Promise<Category[]> {
 
   return data;
 }
+
+export async function getProduct(id: string): Promise<Product> {
+  const res = await fetch(`${BASE_URL}/products/${id}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch product");
+  }
+
+  const data: Product = await res.json();
+
+  return data;
+}

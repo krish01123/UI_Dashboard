@@ -28,7 +28,7 @@ export default function ShopSidebar({
       <div className="flex flex-col gap-2">
         <button
           onClick={() => onCategoryChange("all")}
-          className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm transition-all duration-200 ${
+          className={`cursor-pointer flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm transition-all duration-200 ${
             selectedCategory === "all"
               ? "bg-indigo-100 text-indigo-600 font-semibold"
               : "text-gray-700 hover:bg-indgigo-50 hover:text-indigo-600"
@@ -42,7 +42,7 @@ export default function ShopSidebar({
           <button
             key={category.slug}
             onClick={() => onCategoryChange(category.slug)}
-            className={`flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm capitalize transition-all duration-200 ${
+            className={`cursor-pointer flex w-full items-center gap-3 rounded-xl px-4 py-3 text-left text-sm capitalize transition-all duration-200 ${
               selectedCategory === category.slug
                 ? "bg-indigo-100 text-indigo-600 font-semibold"
                 : "text-gray-700 hover:bg-indigo-50 hover:text-indigo-600"

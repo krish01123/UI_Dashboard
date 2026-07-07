@@ -39,7 +39,7 @@ export default function WishlistButton({ productId }: Props) {
     <button
       onClick={toggleWishlist}
       aria-label={liked ? "Remove from wishlist" : "Add to wishlist"}
-      className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg text-red-500 shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg active:scale-95"
+      className="cursor-pointer flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg text-red-500 shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg active:scale-95"
     >
       {liked ? (
         <FaHeart className="text-red-500" />
