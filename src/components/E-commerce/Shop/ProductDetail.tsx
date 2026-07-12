@@ -1,8 +1,10 @@
 "use client";
 
+import { useCart } from "@/components/Context/CartContext";
 import { Product } from "@/lib/product";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import { FaArrowLeft, FaStar } from "react-icons/fa";
 
 interface Props {
@@ -11,6 +13,7 @@ interface Props {
 
 export default function ProductDetail({ product }: Props) {
   const router = useRouter();
+  const { addToCart } = useCart();
 
   const [qty, setQty] = useState(1);
   const [activeTab, setActiveTab] = useState<"description" | "reviews">(
@@ -21,6 +24,17 @@ export default function ProductDetail({ product }: Props) {
     product.price +
     (product.price * product.discountPercentage) / 100
   ).toFixed(2);
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: product.id,
+      name: product.title,
+      image: product.thumbnail,
+      price: product.price,
+    });
+
+    toast.success(`${product.title} added to cart`);
+  };
 
   return (
     <div className="bg-white rounded-xl shadow p-8">
@@ -33,7 +47,7 @@ export default function ProductDetail({ product }: Props) {
             >
               <FaArrowLeft className="text-sm" />
             </button>
-          </div>  
+          </div>
           <img
             src={product.thumbnail}
             alt={product.title}
@@ -121,7 +135,10 @@ export default function ProductDetail({ product }: Props) {
               Buy Now
             </button>
 
-            <button className="cursor-pointer bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-lg">
+            <button
+              onClick={handleAddToCart}
+              className="cursor-pointer bg-red-500 hover:bg-red-600 text-white px-8 py-3 rounded-lg"
+            >
               Add to Cart
             </button>
           </div>

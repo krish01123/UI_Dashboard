@@ -1,4 +1,4 @@
-import ProductDetail from "@/components/E-commerce/ProductDetail";
+import ProductDetail from "@/components/E-commerce/Shop/ProductDetail";
 import { getProduct } from "@/lib/api";
 
 interface Props {

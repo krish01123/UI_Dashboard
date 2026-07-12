@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Sidebar from "@/components/Home/Sidebar";
+import { CartProvider } from "@/components/Context/CartContext";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,10 +30,25 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex min-h-screen">
-          <Sidebar />
-          <main className="flex-1 overflow-x-auto p-5 pt-4">{children}</main>
-        </div>
+        <CartProvider>
+          <Toaster
+            position="top-right"
+            reverseOrder={false}
+            toastOptions={{
+              duration: 2500,
+              style: {
+                background: "#fff",
+                color: "#111827",
+                border: "1px solid #E5E7EB",
+                borderRadius: "12px",
+              },
+            }}
+          />
+          <div className="flex min-h-screen">
+            <Sidebar />
+            <main className="flex-1 overflow-x-auto p-5 pt-4">{children}</main>
+          </div>
+        </CartProvider>
       </body>
     </html>
   );

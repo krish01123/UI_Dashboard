@@ -4,16 +4,34 @@ import { Product } from "@/lib/product";
 import WishlistButton from "./WishlistButton";
 import { FaShoppingCart, FaStar } from "react-icons/fa";
 import Link from "next/link";
+import { useCart } from "@/components/Context/CartContext";
+import React from "react";
+import toast from "react-hot-toast";
 
 interface Props {
   product: Product;
 }
 
 export default function ProductCard({ product }: Props) {
+  const { addToCart } = useCart();
+
   const oldPrice = (
     product.price +
     (product.price * product.discountPercentage) / 100
   ).toFixed(2);
+
+  const handleAddToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    addToCart({
+      id: product.id,
+      name: product.title,
+      image: product.thumbnail,
+      price: product.price,
+    });
+
+    toast.success(`${product.title} added to cart`);
+  };
 
   return (
     <Link href={`/e-commerce/shop/${product.id}`}>
@@ -33,8 +51,8 @@ export default function ProductCard({ product }: Props) {
           </div>
 
           <button
-            onClick={(e) => e.preventDefault()}
-            className="absolute bottom-4 right-4 flex h-11 w-11 translate-y-16 items-center justify-center rounded-full bg-indigo-600 text-white shadow-lg transition-transform duration-300 group-hover:translate-y-0 hover:bg-indigo-700"
+            onClick={handleAddToCart}
+            className="cursor-pointer absolute bottom-4 right-4 flex h-11 w-11 translate-y-16 items-center justify-center rounded-full bg-indigo-600 text-white shadow-lg transition-transform duration-300 group-hover:translate-y-0 hover:bg-indigo-700"
           >
             <FaShoppingCart size={18} />
           </button>

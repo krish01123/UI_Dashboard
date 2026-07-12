@@ -3,7 +3,7 @@
 import { Product } from "@/lib/product";
 import { useDebounce } from "@/lib/hooks";
 import { useEffect, useState } from "react";
-import SearchBar from "./SearchBar";
+import SearchBar from "../SearchBar";
 import SortDropdown from "./SortDropdown";
 import ShopSidebar from "./ShopSidebar";
 import ProductGrid from "./ProductGrid";
