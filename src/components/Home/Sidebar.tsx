@@ -33,6 +33,7 @@ const menuItems = [
       { title: "Shop", href: "/e-commerce/shop" },
       { title: "List", href: "/e-commerce/list" },
       { title: "Checkout", href: "/e-commerce/checkout" },
+      { title: "Add Product", href: "/e-commerce/admin/products/new" },
     ],
   },
 ];
